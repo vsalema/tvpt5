@@ -1,37 +1,7 @@
-<html lang="en" class=""><script>
-    window[Symbol.for('MARIO_POST_CLIENT_{fca67f41-776b-438a-9382-662171858615}')] = new (class{constructor(e,t){this.name=e,this.destination=t,this.serverListeners={},this.bgRequestsListeners={},this.bgEventsListeners={},window.addEventListener("message",(e=>{const t=e.data,s=!(t.destination&&t.destination===this.name),n=!t.event;if(!s&&!n)if("MARIO_POST_SERVER__BG_RESPONSE"===t.event){const e=t.args;if(this.hasBgRequestListener(e.requestId)){try{this.bgRequestsListeners[e.requestId](e.response)}catch(e){}delete this.bgRequestsListeners[e.requestId]}}else if("MARIO_POST_SERVER__BG_EVENT"===t.event){const e=t.args;if(this.hasBgEventListener(e.event))try{this.bgEventsListeners[t.id](e.payload)}catch(e){}}else if(this.hasServerListener(t.event))try{this.serverListeners[t.event](t.args)}catch(e){}}))}emitToServer(e,t){const s=this.generateUIID(),n={args:t,destination:this.destination,event:e,id:s};return window.postMessage(n,location.origin),s}emitToBg(e,t){const s=this.generateUIID(),n={bgEventName:e,requestId:s,args:t};return this.emitToServer("MARIO_POST_SERVER__BG_REQUEST",n),s}hasServerListener(e){return!!this.serverListeners[e]}hasBgRequestListener(e){return!!this.bgRequestsListeners[e]}hasBgEventListener(e){return!!this.bgEventsListeners[e]}fromServerEvent(e,t){this.serverListeners[e]=t}fromBgEvent(e,t){this.bgEventsListeners[e]=t}fromBgResponse(e,t){this.bgRequestsListeners[e]=t}generateUIID(){return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,(function(e){const t=16*Math.random()|0;return("x"===e?t:3&t|8).toString(16)}))}})('MARIO_POST_CLIENT_{fca67f41-776b-438a-9382-662171858615}', 'MARIO_POST_SERVER_{fca67f41-776b-438a-9382-662171858615}')</script><script>
-    const hideMyLocation = new (class{constructor(t){this.clientKey=t,this.watchIDs={},this.client=window[Symbol.for(t)];const e=navigator.geolocation.getCurrentPosition,o=navigator.geolocation.watchPosition,n=navigator.geolocation.clearWatch,i=this;navigator.geolocation.getCurrentPosition=function(t,o,n){i.handle(e,"GET",t,o,n)},navigator.geolocation.watchPosition=function(t,e,n){return i.handle(o,"WATCH",t,e,n)},navigator.geolocation.clearWatch=function(t){if(-1===t)return;const e=i.watchIDs[t];return delete i.watchIDs[t],n.apply(this,[e])}}handle(t,e,o,n,i){const a=this.client.emitToBg("HIDE_MY_LOCATION__GET_LOCATION");let r=this.getRandomInt(0,1e5);if(this.client.fromBgResponse(a,(a=>{if(a.enabled)if("SUCCESS"===a.status){const t=this.map(a);o(t)}else{const t=this.errorObj();n(t),r=-1}else{const a=[o,n,i],c=t.apply(navigator.geolocation,a);"WATCH"===e&&(this.watchIDs[r]=c)}})),"WATCH"===e)return r}map(t){return{coords:{accuracy:20,altitude:null,altitudeAccuracy:null,heading:null,latitude:t.latitude,longitude:t.longitude,speed:null},timestamp:Date.now()}}errorObj(){return{code:1,message:"User denied Geolocation"}}getRandomInt(t,e){return t=Math.ceil(t),e=Math.floor(e),Math.floor(Math.random()*(e-t+1))+t}})('MARIO_POST_CLIENT_{fca67f41-776b-438a-9382-662171858615}')
-  </script><script ecommerce-type="extend-native-history-api">(()=>{const e=history.pushState,t=history.replaceState,a=history.back,r=history.forward;function n(){window.postMessage({_custom_type_:"CUSTOM_ON_URL_CHANGED"})}history.pushState=function(){e.apply(history,arguments),n()},history.replaceState=function(){t.apply(history,arguments),n()},history.back=function(){a.apply(history,arguments),n()},history.forward=function(){r.apply(history,arguments),n()}})()</script><head>
-
-  <meta charset="UTF-8">
-  <title>CodePen Demo</title>
-
-  <meta name="robots" content="noindex">
-
-  <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
-  <link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
-  <link rel="canonical" href="https://codepen.io/pen/">
-
-  
-  
-
-  <style id="INLINE_PEN_STYLESHEET_ID">
-    
-  </style>
-
-  
-<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
-<script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-6d8bf8b4b479137260842506acbb12717dace0823c023e08b96360e60b0840d9.js"></script>
-<script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-44fe83e49b63affec96918c9af88c0d80b209a862cf87ac46bc933074b8c557d.js"></script>
-<script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
-</head>
-
-<body>
-  
-
-
-
-  <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+ <meta charset="UTF-8">
   <title>TVPT</title>
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -529,7 +499,9 @@ padding: .8rem 1rem;
     }
   </style>
 
-<header class="head-main">
+
+
+  <header class="head-main">
     <div class="navbar navbar-dark bg-dark box-shadow">
     
 <a id="hamburger-menu" class="nav-button ml-auto mr-4"><span id="nav-icon3"><span></span><span></span><span></span><span></span></span></a>
@@ -547,28 +519,33 @@ padding: .8rem 1rem;
               <i class="flotte"> <img src="https://www.zupimages.net/up/24/16/hnih.png" alt="" style="max-width: 48px; max-height: 48px;"></i>
             </a>
 
-    </div><div class="Typography bold body1"><a aria-label="replay" data-test-id="header-link-replay" class="HeaderMenuItem" href="/home/replay">
-</a><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=TVCineActionPT'">
+    </div><div class="Typography bold body1"><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=TVCineActionPT'">
               <i class="flotte"> <img src="https://www.zupimages.net/up/24/16/p31f.png" alt="" style="max-width: 48px; max-height: 48px;"></i>
             </a> 
             
-</div><div class="Typography bold body1"><a aria-label="replay" data-test-id="header-link-replay" class="HeaderMenuItem" href="/home/replay"></a><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=TVCineEmotion'">
+</div><div class="Typography bold body1"><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=TVCineEmotion'">
               <i class="flotte"> <img src="https://www.zupimages.net/up/24/16/vubc.png" alt="" style="max-width: 48px; max-height: 48px;"></i>
             </a>
 
-</div><div class="Typography bold body1"><a aria-label="OQEE Ciné" data-test-id="header-link-oqee-cine" class="HeaderMenuItem" href="/vod/8"></a><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=TVCineEdition'">
+</div><div class="Typography bold body1"><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=TVCineEdition'">
               <i class="flotte"> <img src="https://www.zupimages.net/up/24/16/s5y6.png" alt="" style="max-width: 48px; max-height: 48px;"></i>
             </a>
               
 </div>
-  <div class="Typography bold body1"><a aria-label="ma liste" data-test-id="header-link-my-list" class="HeaderMenuItem" href="/home/my_list"></a><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=TVCineTop'">
+  <div class="Typography bold body1"><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=TVCineTop'">
               <i class="flotte"> <img src="https://www.zupimages.net/up/24/16/hyt3.png" alt="" style="max-width: 48px; max-height: 48px;"></i>
             </a></div>
               
-  <div class="Typography bold body1"><a aria-label="ma liste" data-test-id="header-link-my-list" class="HeaderMenuItem" href="/home/my_list"></a><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=NOSSTUDIOSPT'">
+  <div class="Typography bold body1"><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='//popcdn.day/play.php?stream=NOSSTUDIOSPT'">
               <i class="flotte"> <img src="https://www.zupimages.net/up/24/16/bqop.png" alt="" style="max-width: 48px; max-height: 48px;"></i>
             </a></div>
-  </div></div><div>
+  
+  <div class="Typography bold body1"><a class="" href="javascript:void();" onclick="document.getElementById('vid_frame').src='https://cdnapisec.kaltura.com/p/3253003/embedPlaykitJs/uiconf_id/54413082?iframeembed=true&amp;playlist_id=1_9gqj4ttt'">
+              <i class="flotte"> <img src="https://www.zupimages.net/up/24/17/4xrh.png" alt="" style="max-width: 48px; max-height: 48px;"></i>
+            </a></div>
+  
+  
+            </div></div><div>
             </div>
     </div></div></div>
     <!--navbar end-->
@@ -658,7 +635,7 @@ padding: .8rem 1rem;
         <div data-shaka-player-container="" shaka-controls="true" class="shaka-video-container" bis_skin_checked="1" style="cursor: none;">
 
           <div style="overflow:hidden; padding-bottom:56.25%; position:relative; display:block; width: 100%">
-            <iframe id="vid_frame" width="100%" height="100%" src="https://cdnapisec.kaltura.com/p/3253003/embedPlaykitJs/uiconf_id/54413082?iframeembed=true&amp;playlist_id=1_9gqj4ttt" frameborder="0" allowfullscreen="" scrolling="no" allow-pointer-lock="" style="position:absolute; top:0; left: 0"></iframe>
+            <iframe id="vid_frame" width="100%" height="100%" src="https://vsalema.github.io/tvi/" frameborder="0" allowfullscreen="" scrolling="no" allow-pointer-lock="" style="position:absolute; top:0; left: 0"></iframe>
           </div>
 
           <div class="shaka-controls-container" bis_skin_checked="1">
